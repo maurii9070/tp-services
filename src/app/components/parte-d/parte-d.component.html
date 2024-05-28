@@ -1,0 +1,59 @@
+<div class="row m-auto gap-4" style="max-width: 1024px;">
+    <form class="col-lg-5" (submit)="consultar()">
+        @if(error){
+        <div class="alert alert-danger text-center" role="alert">
+            Faltan datos, por favor verifica que todos los campos esten completos
+        </div>
+        }
+
+        <div class="mb-4">
+            <label for="moneda" class="form-label">Moneda</label>
+            <select id="moneda" class="form-select" aria-label="Default select example" name="moneda"
+                [(ngModel)]="monedaSeleccionada">
+                <option selected value="">-- Selecciona --</option>
+                @for(moneda of monedas; track moneda.codigo){
+                <option value="{{moneda.codigo}}">{{moneda.texto}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="cripto" class="form-label">Criptomoneda</label>
+            <select id="cripto" class="form-select" aria-label="Default select example" name="moneda"
+                [(ngModel)]="criptoSeleccionada">
+                <option selected value="">-- Selecciona --</option>
+                @for(criptomoneda of criptomonedas; track criptomoneda.CoinInfo.id){
+                <option value="{{criptomoneda.CoinInfo.Name}}">{{criptomoneda.CoinInfo.FullName}}</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary w-100">Cotizar</button>
+        </div>
+    </form>
+
+    @if (!cotizacionVacia()){
+    <div class="col-lg-6">
+        <h2 class="text-center mb-3">Cotizacion</h2>
+        <div class="row align-items-center">
+            <div class="col-3">
+                <img [src]="'https://cryptocompare.com/'+ cotizacion.IMAGEURL" alt="imagen cripto" class="img-fluid">
+            </div>
+            <div class="col-9">
+                <p>El precio es de: <span class="fw-bold">{{cotizacion.PRICE}}</span></p>
+                <p>El precio mas alto del dia: <span class="fw-bold">{{cotizacion.HIGHDAY}}</span></p>
+                <p>El precio mas bajo del dia: <span class="fw-bold">{{cotizacion.LOWDAY}}</span></p>
+                <p>Variacion ultimas 24 horas: <span class="fw-bold">{{cotizacion.CHANGEPCT24HOUR}}%</span></p>
+                <p>Ultima actualizacion: <span class="fw-bold">{{cotizacion.LASTUPDATE}}</span></p>
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="col-12 col-lg-6">
+        <div class="alert alert-warning text-center w-100">
+            Realizá una cotización para ver los resultados
+        </div>
+    </div>
+    }
+</div>

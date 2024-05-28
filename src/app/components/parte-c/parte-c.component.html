@@ -1,0 +1,43 @@
+<div>
+    <h2 class="text-center fw-bold mb-5">Marcas de Autos</h2>
+
+    <div class="m-auto d-flex flex-wrap gap-4" style="max-width: 768px;">
+        @for(marca of marcas; track marca.id){
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="obtenerModelos(marca.name)">{{marca.name}}</button>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Modelo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(modelo of modelos; track modelo.id; let idx = $index){
+                        <tr>
+                            <th scope="row">{{idx}}</th>
+                            <td>{{modelo.name}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

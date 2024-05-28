@@ -1,0 +1,28 @@
+<h2 class="text-center mb-5">Traductor</h2>
+
+<form>
+    <label class="form-label">Traducir del:</label>
+    <select class="form-select mb-4" aria-label="Default select example" name="source" [(ngModel)]="sourceLang">
+        <option selected>--- Seleccionar un idioma ---</option>
+        @for(idioma of idiomas; track idioma.name){
+        <option value="{{idioma.value}}">{{idioma.name}}</option>
+        }
+    </select>
+    <div>
+        <textarea class="form-control" name="" id="" placeholder="Ingresar texto" name="text" [(ngModel)]="text"></textarea>
+    </div>
+
+    <div class="mt-4 mb-4">
+        <button type="submit" class="btn btn-primary" (click)="translateText()">Traducir</button>
+    </div>
+
+    <select class="form-select mb-4" aria-label="Default select example" name="target" [(ngModel)]="targetLang">
+        <option selected>--- Seleccionar un idioma ---</option>
+        @for(idioma of idiomas; track idioma.name){
+        <option value="{{idioma.value}}">{{idioma.name}}</option>
+        }
+    </select>
+    <div>
+        <textarea readonly class="form-control" name="" id="" placeholder="Traduccion">{{translation}}</textarea>
+    </div>
+</form>
